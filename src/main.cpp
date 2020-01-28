@@ -3280,7 +3280,14 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
         return error("%s : null pindexPrev for block %s", __func__, block.GetHash().ToString().c_str());
 
     unsigned int nBitsRequired = GetNextWorkRequired(pindexPrev);
-
+//--//
+char nbita[10];
+itoa(nBitsRequired, nbita, 10); //10 means decimal
+//
+char blocknbita[10];
+itoa(block.nBits,blocknbita,10);
+LogPrintf("WARNING: CheckWork(): %s nbits for block %s - required %s\n",blocknbita ,block.GetHash().ToString().c_str(), nbita);
+//--//
     if (block.nBits != nBitsRequired)
         return error("%s : incorrect proof of work at %d", __func__, pindexPrev->nHeight + 1);
 
